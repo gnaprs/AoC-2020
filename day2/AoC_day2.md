@@ -87,13 +87,8 @@ df.head(3)
 def isValidPassword_p1(password, num1, num2, letter):
     # counting frequency of letter in password
     freq=password.count(letter)
-    
-    if(freq >= int(num1) and freq <= int(num2)):
-        # letter freq in specified range
-        return(True) 
-    else:
-        # letter freq not in specified range
-        return(False)
+    # check if letter in specified range
+    return (freq >= int(num1) and freq <= int(num2))
 
 df['valid_p1']=df.apply(lambda x: isValidPassword_p1(x['password'], x['num1'], x['num2'], x['letter']), axis=1)
 df['valid_p1'].value_counts()
@@ -116,13 +111,7 @@ def isValidPassword_p2(password, num1, num2, letter):
     # function is essentially an XNOR gate!
     l1 = (password[int(num1)-1]==letter) # check if 1st character matches
     l2 = (password[int(num2)-1]==letter) # check if 2nd character matches
-
-    if l1 == l2:
-        # T/T or F/F
-        return(False)
-    else:
-        # T/F or F/T
-        return(True)
+    return (l1^l2)
 
 df['valid_p2']=df.apply(lambda x: isValidPassword_p2(x['password'], x['num1'], x['num2'], x['letter']), axis=1)
 df['valid_p2'].value_counts()
