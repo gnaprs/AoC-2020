@@ -1,6 +1,5 @@
 # Day 6
 
-
 ```python
 import pandas as pd 
 import re
